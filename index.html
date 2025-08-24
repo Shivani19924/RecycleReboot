@@ -7,7 +7,7 @@
   <meta name="description" content="Give, swap, and reuse items locally. Keep good stuff out of landfills." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Top Navigation -->
@@ -53,6 +53,7 @@
     </div>
   </section>
 
+
   <!-- Marketplace -->
   <main id="market" class="container">
     <div class="toolbar">
@@ -71,11 +72,18 @@
         <button id="openBookmarks" class="btn btn--ghost">Bookmarks</button>
       </div>
     </div>
+    
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+  <button onclick="localStorage.clear(); location.reload();">
+    Reset App
+  </button>
+</div>
 
     <div id="grid" class="grid" aria-live="polite"></div>
     <div id="empty" class="empty hidden">
       <h3>No matching items</h3>
       <p>Try clearing filters or broadening your search.</p>
+      
     </div>
   </main>
 

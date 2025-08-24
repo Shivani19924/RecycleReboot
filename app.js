@@ -20,7 +20,7 @@ function load(key, fallback){
   catch { return fallback; }
 }
 
-// ---- Sample Data (first run only) ----
+
 const SAMPLE_ITEMS = [
   {
     id: uid(),
@@ -29,7 +29,7 @@ const SAMPLE_ITEMS = [
     type: "free",
     location: "600042",
     desc: "Good condition. Pickup near metro. DM in description.",
-    img: "assets/placeholder.jpg",
+    img: "assets/chair.jpg",
     ts: Date.now() - 1000 * 60 * 60 * 6
   },
   {
@@ -39,7 +39,7 @@ const SAMPLE_ITEMS = [
     type: "donate",
     location: "560001",
     desc: "Complete set, lightly used.",
-    img: "assets/placeholder.jpg",
+    img: "assets/physics.jpeg",
     ts: Date.now() - 1000 * 60 * 60 * 30
   },
   {
@@ -49,7 +49,7 @@ const SAMPLE_ITEMS = [
     type: "swap",
     location: "600040",
     desc: "Swap for any stainless bottle.",
-    img: "assets/placeholder.jpg",
+    img: "assets/jar.jpeg",
     ts: Date.now() - 1000 * 60 * 60 * 54
   },
   {
@@ -59,7 +59,7 @@ const SAMPLE_ITEMS = [
     type: "free",
     location: "400001",
     desc: "Great for rags or DIY.",
-    img: "assets/placeholder.jpg",
+    img: "assets/tshirt.jpeg",
     ts: Date.now() - 1000 * 60 * 60 * 80
   },
   {
@@ -69,20 +69,18 @@ const SAMPLE_ITEMS = [
     type: "free",
     location: "641001",
     desc: "Fully working. Pickup weekends.",
-    img: "assets/placeholder.jpg",
+    img: "assets/keyboard.jpeg",
     ts: Date.now() - 1000 * 60 * 60 * 100
   }
 ];
 
 function ensureSeed() {
-  let items = load(STORAGE_KEYS.ITEMS, null);
-  if (!items) {
-    save(STORAGE_KEYS.ITEMS, SAMPLE_ITEMS);
-    save(STORAGE_KEYS.BOOKMARKS, []);
-    save(STORAGE_KEYS.STATS, { items: 5, people: 5, co2: 36 });
-  }
+  // Always overwrite with new sample items
+  save(STORAGE_KEYS.ITEMS, SAMPLE_ITEMS);
+  save(STORAGE_KEYS.BOOKMARKS, []);
+  save(STORAGE_KEYS.STATS, { items: 5, people: 5, co2: 36 });
 }
-ensureSeed();
+
 
 // ---- State ----
 let ITEMS = load(STORAGE_KEYS.ITEMS, []);
