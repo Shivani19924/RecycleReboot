@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zero-Waste NEO</title>
+  <meta name="description" content="Give, swap, and reuse items locally. Keep good stuff out of landfills." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header class="nav">
+    <div class="nav__left">
+      <img src="assets/logo.svg" alt="Zero-Waste logo" class="logo" />
+      <span class="brand">Zero-Waste NEO</span>
+    </div>
+    <nav class="nav__right">
+      <a href="#market">Marketplace</a>
+      <a href="#how">How it works</a>
+      <a href="#about">About</a>
+      <button id="openPost" class="btn btn--primary">Post an Item</button>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__content">
+      <h1>Give. Swap. Reuse.</h1>
+      <p>Find a new home for things you no longer need — and discover useful items nearby. Let’s keep good stuff out of landfills.</p>
+
+      <div class="searchbar">
+        <input id="q" type="search" placeholder="Search chairs, books, utensils…" aria-label="Search items" />
+        <select id="category">
+          <option value="">All categories</option>
+          <option>Furniture</option>
+          <option>Electronics</option>
+          <option>Kitchen</option>
+          <option>Books</option>
+          <option>Clothing</option>
+          <option>Other</option>
+        </select>
+        <input id="location" type="text" placeholder="Location / Pincode" aria-label="Location" />
+        <button id="doSearch" class="btn btn--primary">Search</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><span id="statItems">0</span><small>items saved</small></div>
+        <div class="stat"><span id="statPeople">0</span><small>people helped</small></div>
+        <div class="stat"><span id="statCO2">0</span><small>kg CO₂ avoided</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marketplace -->
+  <main id="market" class="container">
+    <div class="toolbar">
+      <div class="tabs" role="tablist" aria-label="Filter">
+        <button class="tab is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="tab" data-filter="free" role="tab">Free</button>
+        <button class="tab" data-filter="swap" role="tab">Swap</button>
+        <button class="tab" data-filter="donate" role="tab">Donate</button>
+        <button class="tab" data-filter="wanted" role="tab">Wanted</button>
+      </div>
+      <div class="right-controls">
+        <label class="toggle">
+          <input type="checkbox" id="onlyNearby" />
+          <span>Only nearby</span>
+        </label>
+        <button id="openBookmarks" class="btn btn--ghost">Bookmarks</button>
+      </div>
+    </div>
+
+    <div id="grid" class="grid" aria-live="polite"></div>
+    <div id="empty" class="empty hidden">
+      <h3>No matching items</h3>
+      <p>Try clearing filters or broadening your search.</p>
+    </div>
+  </main>
+
+  <!-- How it works -->
+  <section id="how" class="how container">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li class="card">
+        <h3>1. Post an item</h3>
+        <p>Add a short title, category, location and a photo. Mark it free, swap, donate or wanted.</p>
+      </li>
+      <li class="card">
+        <h3>2. Connect locally</h3>
+        <p>Chat via your preferred method (share contact info in the description). Meet up safely in public.</p>
+      </li>
+      <li class="card">
+        <h3>3. Celebrate reuse</h3>
+        <p>Mark it as picked up. Watch your stats grow as you help the planet.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about container">
+    <h2>About Zero-Waste NEO</h2>
+    <p>Zero-Waste NEO is a simple, community-driven platform to reduce waste through gifting and swapping. This version is a clean-room redesign built with vanilla HTML/CSS/JS and a distinct UI from other implementations.</p>
+  </section>
+
+  <!-- Post Listing Modal -->
+  <dialog id="postModal" class="modal">
+    <form id="postForm" method="dialog">
+      <header class="modal__head">
+        <h3>Post an Item</h3>
+        <button type="button" class="icon-btn" id="closePost" aria-label="Close">✕</button>
+      </header>
+
+      <div class="form-grid">
+        <label>Title
+          <input name="title" required maxlength="60" />
+        </label>
+        <label>Category
+          <select name="category" required>
+            <option>Furniture</option>
+            <option>Electronics</option>
+            <option>Kitchen</option>
+            <option>Books</option>
+            <option>Clothing</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>Type
+          <select name="type" required>
+            <option value="free">Free</option>
+            <option value="swap">Swap</option>
+            <option value="donate">Donate</option>
+            <option value="wanted">Wanted</option>
+          </select>
+        </label>
+        <label>Location / Pincode
+          <input name="location" placeholder="e.g. 560001" required />
+        </label>
+        <label>Photo
+          <input name="photo" type="file" accept="image/*" />
+        </label>
+        <label>Short description
+          <textarea name="desc" rows="3" maxlength="220" placeholder="Pickup details, condition, contact info…"></textarea>
+        </label>
+      </div>
+
+      <footer class="modal__foot">
+        <button type="reset" class="btn btn--ghost">Clear</button>
+        <button type="submit" class="btn btn--primary">Publish</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- Bookmarks Drawer -->
+  <dialog id="bookmarksModal" class="modal modal--right">
+    <header class="modal__head">
+      <h3>Bookmarks</h3>
+      <button type="button" class="icon-btn" id="closeBookmarks" aria-label="Close">✕</button>
+    </header>
+    <div id="bookmarksGrid" class="grid"></div>
+  </dialog>
+
+  <footer class="footer">
+    <small>© <span id="year"></span> Zero-Waste NEO • Built with ❤️ for reuse</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
